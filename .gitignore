@@ -1,0 +1,14 @@
+node_modules/
+logs/
+browser-profile/
+probe-profile/
+login-probe-profile/
+cocos-probe-profile/
+cocos-method-profile/
+
+.env
+*.zip
+*.log
+
+.DS_Store
+Thumbs.db
