@@ -864,6 +864,9 @@ async function runCollectorOnce() {
       "--enable-unsafe-swiftshader",
       "--use-angle=swiftshader",
 
+      "--enable-features=DnsOverHttps",
+      "--dns-over-https-templates=https://cloudflare-dns.com/dns-query",
+
       "--disable-features=Translate,BackForwardCache,AcceptCHFrame,MediaRouter",
       "--disable-background-networking",
       "--disable-default-apps",
