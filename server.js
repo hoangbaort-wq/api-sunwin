@@ -839,6 +839,28 @@ async function tryGotoOneUrl(page) {
       await page.goto(url, { waitUntil: "load", timeout: 180000 });
       await sleep(5000);
 
+      const pageCheck = await page.evaluate(() => {
+        const text = document.body ? document.body.innerText : "";
+        return {
+          title: document.title,
+          textPreview: text.slice(0, 500),
+          isForbidden:
+            text.includes("FORBIDDEN") ||
+            text.includes("không được phép truy cập") ||
+            text.includes("We are not serving your location")
+        };
+      }).catch((err) => ({
+        title: null,
+        textPreview: "",
+        isForbidden: false,
+        error: err.message
+      }));
+
+      if (pageCheck.isForbidden) {
+        console.log("[PAGE] URL bị FORBIDDEN:", url, pageCheck);
+        throw new Error("URL bị FORBIDDEN: " + url);
+      }
+
       return url;
     } catch (err) {
       lastError = err;
